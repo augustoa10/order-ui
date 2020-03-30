@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+  ui:
+    build: .
+    image: cloudontime/ui
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/root
+    ports:
+      - 4200:4200
+    command: bash -c "yarn install && yarn start"
