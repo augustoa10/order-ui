@@ -1,0 +1,88 @@
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="userFormGroup" [editable]="isEditable">
+        <form [formGroup]="userFormGroup">
+            <ng-template matStepLabel>Cadastro de Usuário</ng-template>
+            <div>
+                <mat-form-field>
+                    <mat-label>name</mat-label>
+                    <input matInput formControlName="name" placeholder="Nome" required>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <mat-label>email</mat-label>
+                    <input matInput formControlName="email" placeholder="email" required>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field>
+                    <mat-label>cpf</mat-label>
+                    <input matInput formControlName="cpf" placeholder="CPF" required>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button matStepperNext>Próximo</button>
+            </div>
+        </form>
+    </mat-step>
+
+    <mat-step [stepControl]="orderFormGroup" [editable]="isEditable">
+        <form [formGroup]="orderFormGroup">
+        <ng-template matStepLabel>Cadastro de Assinatura</ng-template>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Plano</mat-label>
+                <mat-select>
+                <mat-option formControlName="planId" *ngFor="let plan of plans" [value]="plan.id">
+                    {{ plan.name }}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput [formControl]="orderFormGroup.get('deviceModel')" [matAutocomplete]="autocomplete">
+            </mat-form-field>
+
+            <mat-autocomplete #autocomplete="matAutocomplete">
+                <mat-option *ngFor="let device of filteredDeviceModels" [value]="device">
+                    {{ device }}
+                </mat-option>
+            </mat-autocomplete>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Imei do Dispositivo</mat-label>
+                <input matInput formControlName="deviceImei" placeholder=""
+                        required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Parcelas</mat-label>
+                <input matInput formControlName="installments" placeholder="Ex. 1 Main St, New York, NY"
+                        required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <button mat-button matStepperNext>Próximo</button>
+        </div>
+        </form>
+    </mat-step>
+
+    <mat-step>
+        <ng-template matStepLabel>Concluído</ng-template>
+            <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

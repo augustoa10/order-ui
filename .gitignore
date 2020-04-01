@@ -32,14 +32,17 @@ speed-measure-plugin*.json
 .history/*
 
 # misc
+/.config
+/.npm
 /.sass-cache
 /connect.lock
 /coverage
 /libpeerconnection.log
+/typings
+.bash_history
 npm-debug.log
 yarn-error.log
 testem.log
-/typings
 
 # System Files
 .DS_Store
